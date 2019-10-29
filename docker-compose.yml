@@ -1,0 +1,11 @@
+version: '3.4'
+
+services:
+  app.ids.server:
+    container_name: appidsserver-c
+    image: appidsserver
+    build:
+      context: .
+      dockerfile: App.IDS.Server/Dockerfile
+    ports:
+      - "5000:80"

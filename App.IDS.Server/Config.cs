@@ -13,32 +13,30 @@ namespace App.IDS.Server
                 new IdentityResources.OpenId()
             };
 
-        public static IEnumerable<ApiResource> Apis =>
-            new ApiResource[]
+        public static IEnumerable<ApiResource> GetApis()
+        {
+            var apis = new List<ApiResource>();
+
+            apis.Add(new ApiResource("orderApi", "orderApi"));
+            apis.Add(new ApiResource("userApi", "userApi"));
+
+            return apis;
+        }
+
+        public static IEnumerable<Client> GetClients()
+        {
+            var clients = new List<Client>();
+            var clientApp = new Client
             {
-                new ApiResource("api1", "My API")
+                ClientId = "clientapp",
+                AllowedGrantTypes = GrantTypes.ClientCredentials,
+                ClientSecrets = { new Secret("secret".Sha256()) },
+                AllowedScopes = { "orderApi" }
             };
+            clients.Add(clientApp);
+            return clients;
+        }
 
-        public static IEnumerable<Client> Clients =>
-            new Client[]
-            {
-                new Client
-                {
-                    ClientId = "clientapp",
-
-                    // no interactive user, use the clientid/secret for authentication
-                    AllowedGrantTypes = GrantTypes.ClientCredentials,
-
-                    // secret for authentication
-                    ClientSecrets =
-                    {
-                        new Secret("secret".Sha256())
-                    },
-
-                    // scopes that client has access to
-                    AllowedScopes = { "api1" }
-                }
-            };
         public static List<TestUser> GetUsers()
         {
             return new List<TestUser>
