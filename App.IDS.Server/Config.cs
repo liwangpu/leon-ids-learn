@@ -1,5 +1,7 @@
 ﻿using IdentityServer4.Models;
+using IdentityServer4.Test;
 using System.Collections.Generic;
+using System.Security.Claims;
 
 namespace App.IDS.Server
 {
@@ -22,7 +24,7 @@ namespace App.IDS.Server
             {
                 new Client
                 {
-                    ClientId = "client",
+                    ClientId = "clientapp",
 
                     // no interactive user, use the clientid/secret for authentication
                     AllowedGrantTypes = GrantTypes.ClientCredentials,
@@ -37,6 +39,22 @@ namespace App.IDS.Server
                     AllowedScopes = { "api1" }
                 }
             };
+        public static List<TestUser> GetUsers()
+        {
+            return new List<TestUser>
+                 {
+                                 new TestUser
+                                 {
+                                      SubjectId="1",
+                                      Username="admin",
+                                      Password="123456",
+                                      Claims=new List<Claim>
+                                      {
+                                        new Claim("justtest","xixi")
+                                      }
+                                 }
+                  };
+        }
 
     }
 }
