@@ -23,6 +23,11 @@ namespace App.IDS.Server
             apis.Add(new ApiResource("orderApi", "orderApi") { ApiSecrets = { new Secret("123456".Sha256()) } });
             apis.Add(new ApiResource("userApi", "userApi") { ApiSecrets = { new Secret("654321".Sha256()) } });
 
+            //apis.Add(new ApiResource("testApi")
+            //{
+            //    UserClaims
+            //});
+
             return apis;
         }
 
