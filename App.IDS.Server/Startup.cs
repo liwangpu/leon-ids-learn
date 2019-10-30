@@ -47,7 +47,12 @@ namespace App.IDS.Server
             .AddInMemoryApiResources(Config.GetApis())
             .AddInMemoryClients(Config.GetClients());
 
+
+
+            //var fileName = Path.Combine(env.WebRootPath, "YOUR_FileName");
+
             builder.AddDeveloperSigningCredential();
+            //builder.AddSigningCredential();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
