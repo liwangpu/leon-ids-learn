@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Reflection;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc;
 
 namespace App.IDS.Server
 {
@@ -25,6 +26,7 @@ namespace App.IDS.Server
             const string operateConnectionString = @"server=122.51.54.26;userid=root;password=root;database=ids.operation;";
             var migrationsAssembly = typeof(Startup).GetTypeInfo().Assembly.GetName().Name;
 
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             var builder = services.AddIdentityServer()
                  //.AddConfigurationStore(options =>
@@ -59,6 +61,7 @@ namespace App.IDS.Server
         public void Configure(IApplicationBuilder app)
         {
             app.UseIdentityServer();
+            app.UseMvc();
         }
     }
 }
