@@ -20,12 +20,18 @@ namespace App.Order.Server
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddAuthentication("Bearer")
-             .AddJwtBearer("Bearer", options =>
+             .AddIdentityServerAuthentication("Bearer", options =>
                 {
-                    options.Authority = "http://192.168.99.100:5000";
+                    options.Authority = "http://localhost:5000";
+                    options.ApiName = "orderApi";
+                    options.ApiSecret = "123456";
+
+                    //options.ClientId = "orderapp";
+                    //options.ClientSecret = "secret";
+
                     options.RequireHttpsMetadata = false;
 
-                    options.Audience = "orderApi";
+                    //options.Audience = "orderApi";
                 });
         }
 

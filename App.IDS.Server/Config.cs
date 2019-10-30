@@ -17,8 +17,11 @@ namespace App.IDS.Server
         {
             var apis = new List<ApiResource>();
 
-            apis.Add(new ApiResource("orderApi", "orderApi"));
+            //apis.Add(new ApiResource("orderApi", "orderApi"));
             apis.Add(new ApiResource("userApi", "userApi"));
+
+            apis.Add(new ApiResource("orderApi", "orderApi") { ApiSecrets = { new Secret("123456".Sha256()) } });
+            //apis.Add(new ApiResource("userApi", "userApi") { ApiSecrets = { new Secret("654321".Sha256()) } });
 
             return apis;
         }
@@ -38,7 +41,8 @@ namespace App.IDS.Server
                 ClientId = "orderapp",
                 AllowedGrantTypes = GrantTypes.ClientCredentials,
                 ClientSecrets = { new Secret("secret".Sha256()) },
-                AllowedScopes = { "orderApi" }
+                AllowedScopes = { "orderApi" },
+                AccessTokenType = AccessTokenType.Reference
             };
             var userapp = new Client
             {
