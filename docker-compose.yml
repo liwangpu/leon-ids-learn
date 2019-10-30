@@ -1,7 +1,6 @@
-version: '3.4'
+version: "3.4"
 
 services:
-
   app.ids.server:
     container_name: appidsserver-c
     image: appidsserver
@@ -10,6 +9,8 @@ services:
       dockerfile: App.IDS.Server/Dockerfile
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
+    volumes:
+      - "/var/ids-tutorial/appidsserver/logs:/app/logs"
     ports:
       - "5000:80"
 
@@ -21,6 +22,8 @@ services:
       dockerfile: App.Order.Server/Dockerfile
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
+    volumes:
+      - "/var/ids-tutorial/apporderserver/logs:/app/logs"
     ports:
       - "5001:80"
 
@@ -32,5 +35,7 @@ services:
       dockerfile: App.User.Server/Dockerfile
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
+    volumes:
+      - "/var/ids-tutorial/appuserserver/logs:/app/logs"
     ports:
       - "5002:80"
