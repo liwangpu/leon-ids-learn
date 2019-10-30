@@ -26,14 +26,30 @@ namespace App.IDS.Server
         public static IEnumerable<Client> GetClients()
         {
             var clients = new List<Client>();
-            var clientApp = new Client
+            var inteapp = new Client
             {
-                ClientId = "clientapp",
+                ClientId = "inteapp",
+                AllowedGrantTypes = GrantTypes.ClientCredentials,
+                ClientSecrets = { new Secret("secret".Sha256()) },
+                AllowedScopes = { "orderApi", "userApi" }
+            };
+            var orderapp = new Client
+            {
+                ClientId = "orderapp",
                 AllowedGrantTypes = GrantTypes.ClientCredentials,
                 ClientSecrets = { new Secret("secret".Sha256()) },
                 AllowedScopes = { "orderApi" }
             };
-            clients.Add(clientApp);
+            var userapp = new Client
+            {
+                ClientId = "userapp",
+                AllowedGrantTypes = GrantTypes.ClientCredentials,
+                ClientSecrets = { new Secret("secret".Sha256()) },
+                AllowedScopes = { "userApi" }
+            };
+            clients.Add(inteapp);
+            clients.Add(orderapp);
+            clients.Add(userapp);
             return clients;
         }
 
