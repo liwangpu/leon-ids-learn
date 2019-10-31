@@ -6,9 +6,9 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace App.Order.Server.Controllers
+namespace App.OMS.Server.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("oms/[controller]")]
     [ApiController]
     [Authorize]
     public class OrderController : ControllerBase

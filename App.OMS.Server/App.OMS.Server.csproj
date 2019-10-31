@@ -5,6 +5,8 @@
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
     <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <AssemblyName>App.OMS.Server</AssemblyName>
+    <RootNamespace>App.OMS.Server</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

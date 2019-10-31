@@ -5,7 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 
-namespace App.Order.Server
+namespace App.OMS.Server
 {
     public class Startup
     {

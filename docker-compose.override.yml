@@ -2,22 +2,26 @@ version: '3.4'
 
 services:
 
-  app.ids.server:
+  App.IDS.Server:
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
     ports:
       - "80"
 
-  app.order.server:
+  App.OMS.Server:
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
     ports:
       - "80"
 
-
-  app.user.server:
+  App.SMS.Server:
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
     ports:
       - "80"
 
+  App.APIGateway.Server:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+    ports:
+      - "80"

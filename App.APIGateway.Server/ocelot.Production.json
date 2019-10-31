@@ -1,0 +1,19 @@
+{
+  "ReRoutes": [
+    {
+      "DownstreamPathTemplate": "/oms/{everything}",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/oms/{everything}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete", "Options", "Patch" ],
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "",
+          "Port": 5001
+        }
+      ]
+    }
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "http://localhost:5008"
+  }
+}

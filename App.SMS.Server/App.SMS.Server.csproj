@@ -5,6 +5,8 @@
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
     <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <AssemblyName>App.SMS.Server</AssemblyName>
+    <RootNamespace>App.SMS.Server</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

@@ -4,7 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using NLog.Web;
 
-namespace App.User.Server
+namespace App.OMS.Server
 {
     public class Program
     {

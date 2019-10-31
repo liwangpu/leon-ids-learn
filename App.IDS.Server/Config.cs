@@ -17,16 +17,12 @@ namespace App.IDS.Server
         {
             var apis = new List<ApiResource>();
 
-            //apis.Add(new ApiResource("orderApi", "orderApi"));
-            //apis.Add(new ApiResource("userApi", "userApi"));
+            //apis.Add(new ApiResource("omsApi", "omsApi"));
+            //apis.Add(new ApiResource("smsApi", "smsApi"));
 
-            apis.Add(new ApiResource("orderApi", "orderApi") { ApiSecrets = { new Secret("123456".Sha256()) } });
-            apis.Add(new ApiResource("userApi", "userApi") { ApiSecrets = { new Secret("654321".Sha256()) } });
+            apis.Add(new ApiResource("omsApi", "omsApi") { ApiSecrets = { new Secret("123456".Sha256()) } });
+            apis.Add(new ApiResource("smsApi", "smsApi") { ApiSecrets = { new Secret("654321".Sha256()) } });
 
-            //apis.Add(new ApiResource("testApi")
-            //{
-            //    UserClaims
-            //});
 
             return apis;
         }
@@ -39,28 +35,28 @@ namespace App.IDS.Server
                 ClientId = "inteapp",
                 AllowedGrantTypes = GrantTypes.ClientCredentials,
                 ClientSecrets = { new Secret("secret".Sha256()) },
-                AllowedScopes = { "orderApi", "userApi" },
+                AllowedScopes = { "omsApi", "smsApi" },
                 AccessTokenType = AccessTokenType.Reference
             };
-            var orderapp = new Client
+            var omsapp = new Client
             {
-                ClientId = "orderapp",
+                ClientId = "omsapp",
                 AllowedGrantTypes = GrantTypes.ClientCredentials,
                 ClientSecrets = { new Secret("secret".Sha256()) },
-                AllowedScopes = { "orderApi" },
+                AllowedScopes = { "omsApi" },
                 AccessTokenType = AccessTokenType.Reference
             };
-            var userapp = new Client
+            var smsapp = new Client
             {
-                ClientId = "userapp",
+                ClientId = "smsapp",
                 AllowedGrantTypes = GrantTypes.ClientCredentials,
                 ClientSecrets = { new Secret("secret".Sha256()) },
-                AllowedScopes = { "userApi" },
+                AllowedScopes = { "smsApi" },
                 AccessTokenType = AccessTokenType.Reference
             };
             clients.Add(inteapp);
-            clients.Add(orderapp);
-            clients.Add(userapp);
+            clients.Add(omsapp);
+            clients.Add(smsapp);
             return clients;
         }
 

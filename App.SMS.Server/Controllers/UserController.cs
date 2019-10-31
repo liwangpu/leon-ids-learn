@@ -6,9 +6,9 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace App.User.Server.Controllers
+namespace App.SMS.Server.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("sms/[controller]")]
     [ApiController]
     [Authorize]
     public class UserController : ControllerBase

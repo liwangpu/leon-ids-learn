@@ -5,7 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 
-namespace App.User.Server
+namespace App.SMS.Server
 {
     public class Startup
     {

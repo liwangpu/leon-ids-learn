@@ -1,7 +1,8 @@
 version: "3.4"
 
 services:
-  app.ids.server:
+
+  App.IDS.Server:
     container_name: appidsserver-c
     image: appidsserver
     build:
@@ -13,29 +14,59 @@ services:
       - "/var/ids-tutorial/appidsserver/logs:/app/logs"
     ports:
       - "5000:80"
+    networks:
+      - idstestnet
+    restart: always
 
-  app.order.server:
-    container_name: apporderserver-c
-    image: apporderserver
+  App.OMS.Server:
+    container_name: appomsserver-c
+    image: appomsserver
     build:
       context: .
-      dockerfile: App.Order.Server/Dockerfile
+      dockerfile: App.OMS.Server/Dockerfile
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
     volumes:
-      - "/var/ids-tutorial/apporderserver/logs:/app/logs"
+      - "/var/ids-tutorial/appomsserver/logs:/app/logs"
     ports:
       - "5001:80"
+    networks:
+      - idstestnet
+    restart: always
 
-  app.user.server:
-    container_name: appuserserver-c
-    image: appuserserver
+  App.SMS.Server:
+    container_name: appsmsserver-c
+    image: appsmsserver
     build:
       context: .
-      dockerfile: App.User.Server/Dockerfile
+      dockerfile: App.SMS.Server/Dockerfile
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
     volumes:
-      - "/var/ids-tutorial/appuserserver/logs:/app/logs"
+      - "/var/ids-tutorial/appsmsserver/logs:/app/logs"
     ports:
       - "5002:80"
+    networks:
+      - idstestnet
+    restart: always
+
+  App.APIGateway.Server:
+    container_name: appapigatewayserver-c
+    image: appapigatewayserver
+    build:
+      context: .
+      dockerfile: App.APIGateway.Server/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+    volumes:
+      - "/var/ids-tutorial/appapigatewayserver/logs:/app/logs"
+    ports:
+      - "6000:80"
+    networks:
+      - idstestnet
+    restart: always
+
+networks:
+  idstestnet:
+
+  
