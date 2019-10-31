@@ -25,14 +25,14 @@ namespace App.SMS.Server
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-            services.AddAuthentication("Bearer")
-             .AddIdentityServerAuthentication("Bearer", options =>
-             {
-                 options.Authority = IdentityServerAuthority;
-                 options.ApiName = IdentityServerAPIName;
-                 options.ApiSecret = IdentityServerAPISecret;
-                 options.RequireHttpsMetadata = IdentityServerRequireHttpsMetadata;
-             });
+            //services.AddAuthentication("Bearer")
+            // .AddIdentityServerAuthentication("Bearer", options =>
+            // {
+            //     options.Authority = IdentityServerAuthority;
+            //     options.ApiName = IdentityServerAPIName;
+            //     options.ApiSecret = IdentityServerAPISecret;
+            //     options.RequireHttpsMetadata = IdentityServerRequireHttpsMetadata;
+            // });
             //.AddJwtBearer("Bearer", options =>
             //{
             //    options.Authority = "http://192.168.99.100:5000";
@@ -49,7 +49,7 @@ namespace App.SMS.Server
             {
                 app.UseDeveloperExceptionPage();
             }
-            app.UseAuthentication();
+            //app.UseAuthentication();
             app.UseMvc();
         }
     }

@@ -10,7 +10,7 @@ namespace App.SMS.Server.Controllers
 {
     [Route("sms/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class UserController : ControllerBase
     {
         [HttpGet]
