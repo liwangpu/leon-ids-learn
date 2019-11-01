@@ -11,12 +11,16 @@ namespace App.IDS.Server
 {
     public class Startup
     {
+
+        public IConfiguration Configuration { get; }
+
+        public string IssuerUri => Configuration["IdentityServer:IssuerUri"];
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
+
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -28,13 +32,16 @@ namespace App.IDS.Server
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-            var builder = services.AddIdentityServer()
-                 //.AddConfigurationStore(options =>
-                 //   {
-                 //       options.ConfigureDbContext = b =>
-                 //           b.UseMySQL(configConnectionString,
-                 //               sql => sql.MigrationsAssembly(migrationsAssembly));
-                 //   })
+            var builder = services.AddIdentityServer(options =>
+            {
+                options.IssuerUri = IssuerUri;
+            })
+                //.AddConfigurationStore(options =>
+                //   {
+                //       options.ConfigureDbContext = b =>
+                //           b.UseMySQL(configConnectionString,
+                //               sql => sql.MigrationsAssembly(migrationsAssembly));
+                //   })
                 .AddOperationalStore(options =>
                  {
                      options.ConfigureDbContext = b =>
@@ -45,9 +52,12 @@ namespace App.IDS.Server
                      options.EnableTokenCleanup = true;
                  })
 
-            .AddInMemoryIdentityResources(Config.Ids)
+            .AddInMemoryIdentityResources(Config.GetIds())
             .AddInMemoryApiResources(Config.GetApis())
+            .AddTestUsers(Config.GetUsers())
             .AddInMemoryClients(Config.GetClients());
+            //.AddResourceOwnerValidator<ResourceOwnerPasswordValidator>();
+             //.AddProfileService<ProfileService>();
 
 
 

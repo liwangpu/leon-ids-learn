@@ -16,6 +16,10 @@ namespace App.OMS.Server.Controllers
         [HttpGet]
         public IActionResult Get()
         {
+
+            var userIdentities = from c in User.Claims
+                                 select new { };
+
             var res = new List<string> { "order1", "order2" };
             return Ok(res);
         }

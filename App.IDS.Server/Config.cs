@@ -7,11 +7,15 @@ namespace App.IDS.Server
 {
     public static class Config
     {
-        public static IEnumerable<IdentityResource> Ids =>
-    new IdentityResource[]
-    {
-                new IdentityResources.OpenId()
-    };
+
+        public static IEnumerable<IdentityResource> GetIds()
+        {
+            var ids = new IdentityResource[]
+              {
+                        new IdentityResources.OpenId()
+              };
+            return ids;
+        }
 
         public static IEnumerable<ApiResource> GetApis()
         {
@@ -23,6 +27,11 @@ namespace App.IDS.Server
             apis.Add(new ApiResource("omsApi", "omsApi") { ApiSecrets = { new Secret("123456".Sha256()) } });
             apis.Add(new ApiResource("smsApi", "smsApi") { ApiSecrets = { new Secret("654321".Sha256()) } });
 
+            apis.Add(new ApiResource("testApi", "this is test api")
+            {
+                ApiSecrets = { new Secret("123456".Sha256()) },
+                UserClaims = new[] { "aa", "bb" }
+            });
 
             return apis;
         }
@@ -54,27 +63,40 @@ namespace App.IDS.Server
                 AllowedScopes = { "smsApi" },
                 AccessTokenType = AccessTokenType.Reference
             };
+
+
+            var testapp = new Client
+            {
+                ClientId = "testapp",
+                AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
+                //ClientSecrets = { new Secret("123456".Sha256()) },
+                RequireClientSecret = false,
+                AllowedScopes = { "testApi" },
+                //Claims = { new Claim("testclaim", "234", "aa", "bb") },
+                //Claims = new List<Claim> { new Claim("cc", "cc") },
+                AccessTokenType = AccessTokenType.Jwt,
+                ClientClaimsPrefix = string.Empty,
+                //UpdateAccessTokenClaimsOnRefresh = true,
+                //AllowOfflineAccess = true,
+            };
+
             clients.Add(inteapp);
             clients.Add(omsapp);
             clients.Add(smsapp);
+            clients.Add(testapp);
             return clients;
         }
 
         public static List<TestUser> GetUsers()
         {
-            return new List<TestUser>
-                 {
-                                 new TestUser
-                                 {
-                                      SubjectId="1",
-                                      Username="admin",
-                                      Password="123456",
-                                      Claims=new List<Claim>
-                                      {
-                                        new Claim("justtest","xixi")
-                                      }
-                                 }
-                  };
+            var users = new List<TestUser>();
+            users.Add(new TestUser
+            {
+                SubjectId = "1",
+                Username = "admin",
+                Password = "123456"
+            });
+            return users;
         }
     }
 }

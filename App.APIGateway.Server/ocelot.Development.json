@@ -34,14 +34,10 @@
           "Host": "192.168.99.100",
           "Port": 5002
         }
-      ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "SMSKey",
-        "AllowedScopes": []
-      }
+      ]
     }
   ],
   "GlobalConfiguration": {
-    "BaseUrl": "http://localhost:6000"
+    "BaseUrl": "http://192.168.99.100:6000"
   }
 }
