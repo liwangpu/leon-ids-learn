@@ -11,28 +11,33 @@ namespace App.APIGateway.Server
 {
     public class Startup
     {
+        public IConfiguration Configuration { get; }
+
+        public string IdentityServerAuthority => Configuration["IdentityServer:Authority"];
+        public string IdentityServerClientId => Configuration["IdentityServer:ClientId"];
+        public string IdentityServerAPISecret => Configuration["IdentityServer:ApiSecret"];     
+        public bool IdentityServerRequireHttpsMetadata => Convert.ToBoolean(Configuration["IdentityServer:RequireHttpsMetadata"]);
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
+      
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var authenticationProviderKey = "SMSKey";
+            var authenticationProviderKey = "OcelotClient";
             Action<IdentityServerAuthenticationOptions> options = o =>
             {
-                //o.Authority = "http://192.168.99.100";
-                //o.ApiName = "smsApi";
+                o.Authority = IdentityServerAuthority;
+                o.RequireHttpsMetadata = IdentityServerRequireHttpsMetadata;
                 o.SupportedTokens = SupportedTokens.Reference;
-                //o.ApiSecret = "secret";
 
-                o.Authority = "http://192.168.99.100:5000";
-                o.ApiName = "smsApi";
-                o.ApiSecret = "654321";
-                o.RequireHttpsMetadata = false;
+                o.ApiName = "ocelotApi";
+                o.ApiSecret = "88888888";
+
             };
 
             services.AddAuthentication()

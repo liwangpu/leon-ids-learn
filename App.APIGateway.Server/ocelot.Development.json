@@ -7,7 +7,7 @@
       "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete", "Options", "Patch" ],
       "DownstreamHostAndPorts": [
         {
-          "Host": "192.168.99.100",
+          "Host": "localhost",
           "Port": 5000
         }
       ]
@@ -22,22 +22,52 @@
           "Host": "192.168.99.100",
           "Port": 5001
         }
-      ]
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "OcelotClient",
+        "AllowedScopes": []
+      }
     },
     {
-      "DownstreamPathTemplate": "/sms/{everything}",
+      "DownstreamPathTemplate": "/sms/user",
       "DownstreamScheme": "http",
-      "UpstreamPathTemplate": "/sms/{everything}",
-      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete", "Options", "Patch" ],
+      "UpstreamPathTemplate": "/sms/user",
+      "UpstreamHttpMethod": [ "Get" ],
       "DownstreamHostAndPorts": [
         {
-          "Host": "192.168.99.100",
+          "Host": "localhost",
           "Port": 5002
         }
       ],
       "AuthenticationOptions": {
-        "AuthenticationProviderKey": "SMSKey",
+        "AuthenticationProviderKey": "OcelotClient",
         "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "user.action": "query"
+      },
+      "AddHeadersToRequest": {
+        "UserId": "Claims[UserId] > value[0] > |",
+        "TenantId": "Claims[TenantId] > value[0] > |"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/sms/user",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/sms/user",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5002
+        }
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "OcelotClient",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "user.action": "create"
       }
     }
   ],

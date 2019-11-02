@@ -10,7 +10,7 @@ namespace App.OMS.Server.Controllers
 {
     [Route("oms/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class OrderController : ControllerBase
     {
         [HttpGet]

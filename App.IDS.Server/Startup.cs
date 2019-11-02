@@ -11,12 +11,13 @@ namespace App.IDS.Server
 {
     public class Startup
     {
+        public IConfiguration Configuration { get; }
+        public string IdentityServerIssuerUri => Configuration["IdentityServer:IssuerUri"];
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
-
-        public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -28,26 +29,29 @@ namespace App.IDS.Server
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-            var builder = services.AddIdentityServer()
-                 //.AddConfigurationStore(options =>
-                 //   {
-                 //       options.ConfigureDbContext = b =>
-                 //           b.UseMySQL(configConnectionString,
-                 //               sql => sql.MigrationsAssembly(migrationsAssembly));
-                 //   })
-                .AddOperationalStore(options =>
+            var builder = services.AddIdentityServer(options =>
+            {
+                options.IssuerUri = IdentityServerIssuerUri;
+            })
+              //.AddConfigurationStore(options =>
+              //   {
+              //       options.ConfigureDbContext = b =>
+              //           b.UseMySQL(configConnectionString,
+              //               sql => sql.MigrationsAssembly(migrationsAssembly));
+              //   })
+              .AddOperationalStore(options =>
                  {
                      options.ConfigureDbContext = b =>
-                         b.UseMySQL(operateConnectionString,
-                             sql => sql.MigrationsAssembly(migrationsAssembly));
+                         b.UseMySQL(operateConnectionString);
 
                      // this enables automatic token cleanup. this is optional.
                      options.EnableTokenCleanup = true;
                  })
-
-            .AddInMemoryIdentityResources(Config.Ids)
-            .AddInMemoryApiResources(Config.GetApis())
-            .AddInMemoryClients(Config.GetClients());
+            .AddInMemoryIdentityResources(IdentityConfig.GetIds())
+            .AddInMemoryApiResources(IdentityConfig.GetApis())
+            .AddInMemoryClients(IdentityConfig.GetClients())
+            .AddResourceOwnerValidator<ResourceOwnerPasswordValidator>()
+            .AddProfileService<ProfileService>();
 
 
 

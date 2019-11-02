@@ -26,14 +26,14 @@ namespace App.OMS.Server
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-            services.AddAuthentication("Bearer")
-             .AddIdentityServerAuthentication("Bearer", options =>
-                {
-                    options.Authority = IdentityServerAuthority;
-                    options.ApiName = IdentityServerAPIName;
-                    options.ApiSecret = IdentityServerAPISecret;
-                    options.RequireHttpsMetadata = IdentityServerRequireHttpsMetadata;
-                });
+            //services.AddAuthentication("Bearer")
+            // .AddIdentityServerAuthentication("Bearer", options =>
+            //    {
+            //        options.Authority = IdentityServerAuthority;
+            //        options.ApiName = IdentityServerAPIName;
+            //        options.ApiSecret = IdentityServerAPISecret;
+            //        options.RequireHttpsMetadata = IdentityServerRequireHttpsMetadata;
+            //    });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -44,7 +44,7 @@ namespace App.OMS.Server
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseAuthentication();
+            //app.UseAuthentication();
             //app.UseAuthorization();
             //app.UseHttpsRedirection();
             app.UseMvc();
